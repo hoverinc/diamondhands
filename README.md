@@ -1,8 +1,6 @@
-## Diamondhands
+## Diamondhands:
 
-Inspired by [stimulus](https://github.com/hotwired/stimulus).
-
-A system is designed around the desire to write code such as:
+React JS designed around the desire to write code such as:
 ```
 <span>{ user.fullName.value() }</span>
 ``` 
@@ -10,6 +8,8 @@ A system is designed around the desire to write code such as:
 ```
 <span>{ user.fullName.edit() }</span>
 ```
+
+Inspired by [stimulus](https://github.com/hotwired/stimulus).
 
 ## Suggested JS folder structure
 #### `// app/javascript/app/...`
@@ -53,7 +53,18 @@ Handle the request response logic. Graphql queries will be defined and composed 
 
 ## Other features
 
-`store.ts` contains a simplified reducer to handle all state in the application. Store keys 🗝 are generated automatically in `resolver.ts` or can be added manually to components that want to talk to the store.
+`store.ts` contains a simplified reducer to handle all state in the application. Store keys 🗝 are generated automatically in `resolver.ts` or can be added manually to components that want to talk to the store. You can talk to the store manually via:
+```
+import { store } from "diamondhands";
+
+store.set({
+  someKey: {
+    nested: "🧞‍♀️"
+  }
+});
+//...
+store.get("someKey.nested");
+```
 
 This example is automatically associated with a model:
 ```
