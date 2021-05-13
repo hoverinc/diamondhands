@@ -1,0 +1,2 @@
+# diamondhands
+💎🙌 Frontend Rails Models
