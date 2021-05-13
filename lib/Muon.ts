@@ -28,8 +28,8 @@ class Muon extends React.Component {
     if (this.state.value.length) return this.state.value;
 
     if (!this.storeKey) {
-      log("dev", `🗝 You need a store key in your component to get a value.`);
-      log("dev", `↳`, this);
+      console.log("dev", `🗝 You need a store key in your component to get a value.`);
+      console.log("dev", `↳`, this);
     }
 
     return this.storeValue();
@@ -66,7 +66,7 @@ class Muon extends React.Component {
 
   private refresh = () => {
     if (!this.mounted) return;
-    log("debug", "🌊 Muon refresh:", this.quark());
+    console.log("debug", "🌊 Muon refresh:", this.quark());
     this.forceUpdate();
   }
 
@@ -74,11 +74,11 @@ class Muon extends React.Component {
     const value = store.get(this.storeKey);
 
     if (this.attr) {
-      log("debug", `🧬 Quark attr:`, this.attr);
+      console.log("debug", `🧬 Quark attr:`, this.attr);
       if (value) {
-        log("debug", `🧩` , `Quark value: ${value}`)
+        console.log("debug", `🧩` , `Quark value: ${value}`)
       } else {
-        if ( this.isFetching() ) log("dev", `🧩`, 'Fetching...');
+        if ( this.isFetching() ) console.log("dev", `🧩`, 'Fetching...');
       }
     }
 

@@ -9,7 +9,7 @@ class Controller {
 
   public getAttribute(action) {
     if ( !this.controllerActionValid(action) ) return;
-    log("debug", "🎛 Controller#getAttribute", `🪡 ${action}`);
+    console.log("debug", "🎛 Controller#getAttribute", `🪡 ${action}`);
 
     // return this.controllerFetch( ...this.requestBody(action) );
     console.warn("Not implimented yet")
@@ -42,7 +42,7 @@ class Controller {
     const body = this[action]();
 
     if (body) {
-      log("dev", "🌮 Request body:", body, this);
+      console.log("dev", "🌮 Request body:", body, this);
     } else {
       error("🍽 Empty request body:", body, this);
     }
@@ -61,13 +61,13 @@ class Controller {
 
   private server() {
     const baseUrl = store.get("serverProps.env.server_url");
-    log("dev", `🎩 Server: ${baseUrl}`);
+    console.log("dev", `🎩 Server: ${baseUrl}`);
 
     return baseUrl;
   }
 
   private success = (res) => {
-    log("debug", "✅ Success:", res);
+    console.log("debug", "✅ Success:", res);
 
     this._finishStack.forEach( (f) => {
       f(res.data);
@@ -78,13 +78,13 @@ class Controller {
   }
 
   private fail = (res) => {
-    log("dev", "❌ Fail:", res);
-    log("dev", "🏗 Check your server & your ngrok tunnel.");
+    console.log("dev", "❌ Fail:", res);
+    console.log("dev", "🏗 Check your server & your ngrok tunnel.");
     return res;
   }
 
   private always = (res) => {
-    log("debug", "👾 Always:", res);
+    console.log("debug", "👾 Always:", res);
     return res;
   }
 

@@ -9,31 +9,31 @@ class Store {
   constructor(initialState) {
     this.state = initialState;
 
-    log("debug", "🗺 Store ctx:", this);
+    console.log("debug", "🗺 Store ctx:", this);
     window.bug = this.debug;
   }
 
   public set(newState) {
-    log("debug", "🚮 Old state:", this.state);
-    log("debug", "💽 New state:", newState);
+    console.log("debug", "🚮 Old state:", this.state);
+    console.log("debug", "💽 New state:", newState);
     
     // Object.assign not recommended for deep merge
     this.state = _.merge(this.state, newState); 
 
     window.setTimeout(() => {
-      log("dev", "🍱 Store state:", this.state);
+      console.log("dev", "🍱 Store state:", this.state);
 
       this.checkWaitFor();
 
       this.onUpdateStack.forEach( (f) => {
-        log("all", "🥞 Store onUpdateStack:", f);
+        console.log("all", "🥞 Store onUpdateStack:", f);
         f(this.state);
       });
     }, 0);
   }
 
   public get(passKey) {
-    log("debug", "💅 Store#get:", passKey);
+    console.log("debug", "💅 Store#get:", passKey);
     
     if (!passKey || passKey === "") {
       error("🙈 Invalid store request: ", arguments);
@@ -54,7 +54,7 @@ class Store {
       this.handleServerResponse(attr, model, res);
     });
 
-    log("dev", "🌀 Starting get from server...", model.name, attr);
+    console.log("dev", "🌀 Starting get from server...", model.name, attr);
     
     if (this.isGraphql(model, attr)) {
       this.requestTracker[attr] = model.controller.gqlAttribute({
@@ -87,7 +87,7 @@ class Store {
   }
 
   public onUpdate = (f) => {
-    log("all", "🥞 Store#onUpdate:", f);
+    console.log("all", "🥞 Store#onUpdate:", f);
     this.onUpdateStack.push(f);
     return 'ok';
   }
@@ -95,19 +95,19 @@ class Store {
   // private
 
   private checkWaitFor() {
-    log("debug", "🧳 Check wait for:", Object.keys(this.waitingForKeys))
+    console.log("debug", "🧳 Check wait for:", Object.keys(this.waitingForKeys))
 
     Object.keys(this.waitingForKeys).forEach( (passKey) => {
       const value = this.get(passKey);
-      log("debug", "🧳 Value:", value);
+      console.log("debug", "🧳 Value:", value);
 
       if ( this.valid(value) ) {
         this.waitingForKeys[passKey].forEach( (f) => {
-          log("debug", "🧳 Wait for callback called:", f);
+          console.log("debug", "🧳 Wait for callback called:", f);
           f(value);
         });
 
-        log("debug", "🧳 Destroyed:", this.waitingForKeys[passKey]);
+        console.log("debug", "🧳 Destroyed:", this.waitingForKeys[passKey]);
         delete this.waitingForKeys[passKey];
       }
     });
@@ -121,13 +121,13 @@ class Store {
     const cachedValue = _.get(this.state, passKey)
     
     if ( this.valid(cachedValue) ) {
-      log("debug", "💰 Cached value:", cachedValue);
+      console.log("debug", "💰 Cached value:", cachedValue);
       return cachedValue;
     }
   }
 
   private handleServerResponse = (attr, model, res) => {
-    log("dev", "📜 Response:", res);
+    console.log("dev", "📜 Response:", res);
     let newStateObj = {};
     
     // Save new state to store
@@ -144,12 +144,12 @@ class Store {
   }
 
   private valid(x) {
-    log("debug", "🦆 Store#valid type:", typeof x);
+    console.log("debug", "🦆 Store#valid type:", typeof x);
     return !_.isNil(x) && !_.isNaN(x);
   }
 
   private debug = () => {
-    if (this.state) log("dev", "🍱", this.state);
+    if (this.state) console.log("dev", "🍱", this.state);
     return this.state;
   }
 }

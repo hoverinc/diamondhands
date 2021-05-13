@@ -23,7 +23,7 @@ class Model {
   // private
 
   private generateResolver = ({ endpoint, attr, Value, Edit }) => {
-    log("dev", "👀 Resolver for:", [this.name].concat(arguments));
+    console.log("dev", "👀 Resolver for:", [this.name].concat(arguments));
 
     this[attr] = resolver({
       endpoint: endpoint,

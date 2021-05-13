@@ -10,7 +10,7 @@ class Atom extends Proton {
 
     if ( Object.keys(this.state).length !== 1 ) {
       error("↳ ⚛ Atoms can only have once piece of state. ⚛");
-      log("dev", this);
+      console.log("dev", this);
     }
   }
 }

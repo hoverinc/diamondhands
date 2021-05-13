@@ -23,7 +23,7 @@ class ApolloController extends Controller {
 
   public gqlAttribute = ({ client, action, variables }) => {
     if ( !this.controllerActionValid(action) ) return;
-    log("dev", "🎛 Controller#gqlAttribute", `🪡 ${action}`);
+    console.log("dev", "🎛 Controller#gqlAttribute", `🪡 ${action}`);
 
     const queryOptions = this.queryOptions(action, variables);
 
@@ -49,7 +49,7 @@ class ApolloController extends Controller {
   }
 
   private handleApolloSuccess = (res, resolve) => {
-    log("dev", "✅ Success:", res);
+    console.log("dev", "✅ Success:", res);
     resolve(res.data);
 
     this._finishStack.forEach( (f) => {
@@ -58,7 +58,7 @@ class ApolloController extends Controller {
   }
 
   private queryOptions(action, variables) {
-    if (variables) log("dev", "🔮 Query variables:", variables);
+    if (variables) console.log("dev", "🔮 Query variables:", variables);
 
     return {
       ...this.baseQueryOptions,
