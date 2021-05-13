@@ -1,4 +1,4 @@
-## Diamondhands:
+## Diamondhands
 
 React JS designed around the desire to write code such as:
 ```
